@@ -18,6 +18,28 @@ class _HomePageState extends State<HomePage> {
     "https://i.imgur.com/rMYMEjp.jpg",
   ];
 
+  late Image img_aust;
+  late Image img_indo;
+  late Image img_thai;
+
+  @override
+  void initState() {
+    super.initState();
+
+    img_aust = Image.network("https://i.imgur.com/Ym4dXMX.jpg");
+    img_indo = Image.network("https://i.imgur.com/Ym4dXMX.jpg");
+    img_thai = Image.network("https://i.imgur.com/Ym4dXMX.jpg");
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    precacheImage(img_aust.image, context);
+    precacheImage(img_indo.image, context);
+    precacheImage(img_thai.image, context);
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Column(
@@ -268,10 +290,13 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: const [
-          Text(
-            "Australia is abundant with unique experiences and awe-inspiring landscapes. There’s a well-known vibrancy in its natural beauty, but don’t forget to seek out its history and culture as well. There's plenty here to inspire your future travel plans so, go on, take a look around and let yourself dream of all the possibilities.",
-            style: TextStyle(
-              fontSize: 20,
+          Padding(
+            padding: EdgeInsets.all(15.0),
+            child: Text(
+              "Australia is abundant with unique experiences and awe-inspiring landscapes. There’s a well-known vibrancy in its natural beauty, but don’t forget to seek out its history and culture as well. There's plenty here to inspire your future travel plans so, go on, take a look around and let yourself dream of all the possibilities.",
+              style: TextStyle(
+                fontSize: 20,
+              ),
             ),
           ),
         ],
@@ -282,10 +307,13 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: const [
-          Text(
-            "India is on the bucket list for many travelers, and it’s no mystery why! The diverse landscape, colorful festivals, and spicy-hot cuisine are already reasons enough to pack your bags to visit Mumbai or Varanasi.",
-            style: TextStyle(
-              fontSize: 20,
+          Padding(
+            padding: EdgeInsets.all(15.0),
+            child: Text(
+              "India is on the bucket list for many travelers, and it’s no mystery why! The diverse landscape, colorful festivals, and spicy-hot cuisine are already reasons enough to pack your bags to visit Mumbai or Varanasi.",
+              style: TextStyle(
+                fontSize: 20,
+              ),
             ),
           ),
         ],
@@ -296,10 +324,13 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: const [
-          Text(
-            "Thailand is a Southeast Asian country. It's known for tropical beaches, opulent royal palaces, ancient ruins and ornate temples displaying figures of Buddha. In Bangkok, the capital, an ultramodern cityscape rises next to quiet canalside communities and the iconic temples of Wat Arun, Wat Pho and the Emerald Buddha Temple (Wat Phra Kaew).",
-            style: TextStyle(
-              fontSize: 20,
+          Padding(
+            padding: EdgeInsets.all(15.0),
+            child: Text(
+              "Thailand is a Southeast Asian country. It's known for tropical beaches, opulent royal palaces, ancient ruins and ornate temples displaying figures of Buddha. In Bangkok, the capital, an ultramodern cityscape rises next to quiet canalside communities and the iconic temples of Wat Arun, Wat Pho and the Emerald Buddha Temple (Wat Phra Kaew).",
+              style: TextStyle(
+                fontSize: 20,
+              ),
             ),
           ),
         ],
