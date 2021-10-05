@@ -1,6 +1,9 @@
 // ignore_for_file: use_key_in_widget_constructors, must_be_immutable
 // ignore_for_file: prefer_const_constructors
 
+// run "flutter pub get cached_network_image" to install cached_network_image dependency
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -17,28 +20,6 @@ class _HomePageState extends State<HomePage> {
     "https://i.imgur.com/5Q5hWSH.jpg",
     "https://i.imgur.com/rMYMEjp.jpg",
   ];
-
-  late Image img_aust;
-  late Image img_indo;
-  late Image img_thai;
-
-  @override
-  void initState() {
-    super.initState();
-
-    img_aust = Image.network("https://i.imgur.com/Ym4dXMX.jpg");
-    img_indo = Image.network("https://i.imgur.com/Ym4dXMX.jpg");
-    img_thai = Image.network("https://i.imgur.com/Ym4dXMX.jpg");
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    precacheImage(img_aust.image, context);
-    precacheImage(img_indo.image, context);
-    precacheImage(img_thai.image, context);
-  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -199,9 +180,10 @@ class _HomePageState extends State<HomePage> {
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: FadeInImage.assetNetwork(
-                  placeholder: 'assets/loading.gif',
-                  image: "https://i.imgur.com/Ym4dXMX.jpg",
+                child: CachedNetworkImage(
+                  imageUrl: "https://i.imgur.com/Ym4dXMX.jpg",
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),
             ),
@@ -238,9 +220,11 @@ class _HomePageState extends State<HomePage> {
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: FadeInImage.assetNetwork(
-                    placeholder: 'assets/loading.gif',
-                    image: "https://i.imgur.com/3wmCBlT.jpg"),
+                child: CachedNetworkImage(
+                  imageUrl: "https://i.imgur.com/3wmCBlT.jpg",
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
               ),
             ),
           ],
@@ -276,9 +260,11 @@ class _HomePageState extends State<HomePage> {
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: FadeInImage.assetNetwork(
-                    placeholder: 'assets/loading.gif',
-                    image: "https://i.imgur.com/kfycTnF.jpg"),
+                child: CachedNetworkImage(
+                  imageUrl: "https://i.imgur.com/kfycTnF.jpg",
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
               ),
             ),
           ],
