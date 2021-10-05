@@ -1,6 +1,6 @@
-# myflutter
+# Travelogue App
 
-A new Flutter project.
+A new Flutter project for the final project for App Development Course.
 
 ## Getting Started
 
