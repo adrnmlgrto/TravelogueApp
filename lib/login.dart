@@ -60,7 +60,14 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Expanded(
                         child: ElevatedButton(
-                            onPressed: () {}, child: Text('LOGIN'))),
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MainPage()),
+                              );
+                            },
+                            child: Text('LOGIN'))),
                   ],
                 ),
                 SizedBox(height: 10.0),
@@ -68,12 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 16),
                   ),
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => MainPage()),
-                    );
-                  },
+                  onPressed: () {},
                   child: const Text('I don\'t have an account.'),
                 ),
               ],
