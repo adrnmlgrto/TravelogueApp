@@ -14,8 +14,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/PARIS.jpg'),
-              fit: BoxFit.cover,
+              image: AssetImage('assets/reg-bg.jpg'),
+              fit: BoxFit.fill,
             ),
           ),
           child: Padding(
@@ -23,14 +23,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'Sign Up',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(height: 30.0),
+                SizedBox(height: 200.0),
                 TextFormField(
                   decoration: InputDecoration(
                     fillColor: Colors.white54,
