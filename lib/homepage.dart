@@ -21,6 +21,63 @@ class _HomePageState extends State<HomePage> {
     "https://i.imgur.com/rMYMEjp.jpg",
   ];
 
+  List<String> imgURLs = [
+    'https://i.imgur.com/Ym4dXMX.jpg',
+    'https://i.imgur.com/3wmCBlT.jpg',
+    'https://i.imgur.com/kfycTnF.jpg'
+  ];
+
+  List<Widget> countrySheets = [
+    Container(
+        padding: EdgeInsets.all(15),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Padding(
+              padding: EdgeInsets.all(15.0),
+              child: Text(
+                "Australia is abundant with unique experiences and awe-inspiring landscapes. There’s a well-known vibrancy in its natural beauty, but don’t forget to seek out its history and culture as well. There's plenty here to inspire your future travel plans so, go on, take a look around and let yourself dream of all the possibilities.",
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+          ],
+        )),
+    Container(
+        padding: EdgeInsets.all(15),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Padding(
+              padding: EdgeInsets.all(15.0),
+              child: Text(
+                "India is on the bucket list for many travelers, and it’s no mystery why! The diverse landscape, colorful festivals, and spicy-hot cuisine are already reasons enough to pack your bags to visit Mumbai or Varanasi.",
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+          ],
+        )),
+    Container(
+        padding: EdgeInsets.all(15),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Padding(
+              padding: EdgeInsets.all(15.0),
+              child: Text(
+                "Thailand is a Southeast Asian country. It's known for tropical beaches, opulent royal palaces, ancient ruins and ornate temples displaying figures of Buddha. In Bangkok, the capital, an ultramodern cityscape rises next to quiet canalside communities and the iconic temples of Wat Arun, Wat Pho and the Emerald Buddha Temple (Wat Phra Kaew).",
+                style: TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ),
+          ],
+        ))
+  ];
+
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Column(
@@ -77,9 +134,9 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(
                       height: 15,
                     ),
-                    buildAustralia(context),
-                    buildIndia(context),
-                    buildThailand(context),
+                    for (int i = 0; i < imgURLs.length; i++)
+                      buildImageWidgets(
+                          context, this.imgURLs[i], this.countrySheets[i]),
                     Padding(
                         padding: EdgeInsets.only(right: 20),
                         child: RichText(
@@ -151,7 +208,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildAustralia(BuildContext context) {
+  Widget buildImageWidgets(
+      BuildContext context, String imgURLs, Widget countrySheets) {
     return Container(
         margin: EdgeInsets.only(left: 10, right: 10, bottom: 18),
         decoration: BoxDecoration(
@@ -175,13 +233,13 @@ class _HomePageState extends State<HomePage> {
                     top: Radius.circular(20),
                   )),
                   context: context,
-                  builder: (builder) => australiaSheet(),
+                  builder: (builder) => countrySheets,
                 );
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: CachedNetworkImage(
-                  imageUrl: "https://i.imgur.com/Ym4dXMX.jpg",
+                  imageUrl: imgURLs,
                   placeholder: (context, url) => CircularProgressIndicator(),
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
@@ -190,135 +248,4 @@ class _HomePageState extends State<HomePage> {
           ],
         ));
   }
-
-  Widget buildIndia(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.only(left: 10, right: 10, bottom: 18),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Colors.transparent,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 2,
-                offset: Offset(4, 4),
-              )
-            ]),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            InkWell(
-              onTap: () {
-                showModalBottomSheet(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(20),
-                  )),
-                  context: context,
-                  builder: (builder) => indiaSheet(),
-                );
-              },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: CachedNetworkImage(
-                  imageUrl: "https://i.imgur.com/3wmCBlT.jpg",
-                  placeholder: (context, url) => CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                ),
-              ),
-            ),
-          ],
-        ));
-  }
-
-  Widget buildThailand(BuildContext context) {
-    return Container(
-        margin: EdgeInsets.only(left: 10, right: 10, bottom: 18),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Colors.transparent,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 2,
-                offset: Offset(4, 4),
-              )
-            ]),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            InkWell(
-              onTap: () {
-                showModalBottomSheet(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(20),
-                  )),
-                  context: context,
-                  builder: (builder) => thailandSheet(),
-                );
-              },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: CachedNetworkImage(
-                  imageUrl: "https://i.imgur.com/kfycTnF.jpg",
-                  placeholder: (context, url) => CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                ),
-              ),
-            ),
-          ],
-        ));
-  }
-
-  Widget australiaSheet() => Container(
-      padding: EdgeInsets.all(15),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: const [
-          Padding(
-            padding: EdgeInsets.all(15.0),
-            child: Text(
-              "Australia is abundant with unique experiences and awe-inspiring landscapes. There’s a well-known vibrancy in its natural beauty, but don’t forget to seek out its history and culture as well. There's plenty here to inspire your future travel plans so, go on, take a look around and let yourself dream of all the possibilities.",
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-          ),
-        ],
-      ));
-
-  Widget indiaSheet() => Container(
-      padding: EdgeInsets.all(15),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: const [
-          Padding(
-            padding: EdgeInsets.all(15.0),
-            child: Text(
-              "India is on the bucket list for many travelers, and it’s no mystery why! The diverse landscape, colorful festivals, and spicy-hot cuisine are already reasons enough to pack your bags to visit Mumbai or Varanasi.",
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-          ),
-        ],
-      ));
-
-  Widget thailandSheet() => Container(
-      padding: EdgeInsets.all(15),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: const [
-          Padding(
-            padding: EdgeInsets.all(15.0),
-            child: Text(
-              "Thailand is a Southeast Asian country. It's known for tropical beaches, opulent royal palaces, ancient ruins and ornate temples displaying figures of Buddha. In Bangkok, the capital, an ultramodern cityscape rises next to quiet canalside communities and the iconic temples of Wat Arun, Wat Pho and the Emerald Buddha Temple (Wat Phra Kaew).",
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-          ),
-        ],
-      ));
 }

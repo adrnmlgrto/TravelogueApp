@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                           builder: (context) => RegistrationPage()),
                     );
                   },
-                  child: const Text('I don\'t have an account.'),
+                  child: const Text('Don\'t have an account? Create now!'),
                 ),
               ],
             ),
