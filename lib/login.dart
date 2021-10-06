@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myflutter/mainpage.dart';
+import 'package:myflutter/registration.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -75,7 +76,13 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 16),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RegistrationPage()),
+                    );
+                  },
                   child: const Text('I don\'t have an account.'),
                 ),
               ],
