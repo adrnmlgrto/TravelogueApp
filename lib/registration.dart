@@ -108,16 +108,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
       );
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/reg-bg.jpg'),
-                fit: BoxFit.fill,
+  Widget build(BuildContext context) => GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/reg-bg.jpg'),
+                  fit: BoxFit.fill,
+                ),
               ),
-            ),
-            child: (_futureUser == null) ? buildForm() : buildFutureBuilder()),
+              child:
+                  (_futureUser == null) ? buildForm() : buildFutureBuilder()),
+        ),
       );
 
   SingleChildScrollView buildForm() => SingleChildScrollView(
@@ -137,6 +141,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     filled: true,
                     labelText: 'First Name',
                   ),
+                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(height: 15.0),
                 TextFormField(
@@ -147,6 +152,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     filled: true,
                     labelText: 'Last Name',
                   ),
+                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(height: 15.0),
                 TextFormField(
@@ -161,6 +167,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     filled: true,
                     labelText: 'Email',
                   ),
+                  textInputAction: TextInputAction.next,
                 ),
                 SizedBox(height: 15.0),
                 TextFormField(
