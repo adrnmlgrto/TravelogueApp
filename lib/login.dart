@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:http/http.dart' as http;
-import 'package:myflutter/loginSuccess.dart';
+import 'package:myflutter/loginStates.dart';
 import 'package:myflutter/registration.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,6 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
   bool _passwordVisible = true;
+  bool _isVisible = true;
 
   final emailController = TextEditingController();
   final passwController = TextEditingController();
@@ -40,13 +41,14 @@ class _LoginPageState extends State<LoginPage> {
 
     if (response.statusCode == 201) {
       print(response.statusCode); // CHECKING RESPONSE CODE, WILL DELETE LATER
-      Navigator.push(
+      Navigator.pushReplacement(
           context,
           MaterialPageRoute(
               builder: (context) => LoginSucess(email: emailController.text)));
     } else {
       print(response.statusCode);
-      Navigator.push(
+
+      Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => LoginFail()));
     }
   }
