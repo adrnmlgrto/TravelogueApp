@@ -86,7 +86,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
         title: Text('Register Failed'),
         content: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Text('''Please try again later.
+          child: Text(
+              '''Please try again later.
               ${snapshot.error}'''),
         ),
       );
@@ -109,30 +110,48 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   @override
   Widget build(BuildContext context) => GestureDetector(
-        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: Scaffold(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
           resizeToAvoidBottomInset: false,
           body: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/reg-bg.jpg'),
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                 ),
               ),
-              child:
-                  (_futureUser == null) ? buildForm() : buildFutureBuilder()),
-        ),
-      );
+              child: Column(children: [
+                SizedBox(height: 60),
+                RichText(
+                  text: TextSpan(
+                    text: "Create an ",
+                    style: TextStyle(fontSize: 30, color: Colors.black),
+                    children: const <TextSpan>[
+                      TextSpan(
+                        text: "account",
+                        style: TextStyle(
+                          color: Colors.deepOrange,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: ListView(children: [
+                    (_futureUser == null) ? buildForm() : buildFutureBuilder()
+                  ]),
+                ),
+              ]))));
 
   SingleChildScrollView buildForm() => SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(30.0, 0, 30.0, 30.0),
+          padding: const EdgeInsets.fromLTRB(30, 0, 30.0, 150.0),
           child: Form(
             key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 200.0),
                 TextFormField(
                   validator: RequiredValidator(errorText: 'Field Required'),
                   controller: fnameController,
@@ -246,7 +265,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const SizedBox(height: 165.0),
               const CircularProgressIndicator(),
+              const SizedBox(height: 20),
+              const Text('Trying to connect...'),
             ],
           ),
         );
