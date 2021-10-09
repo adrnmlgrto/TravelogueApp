@@ -28,8 +28,11 @@ Future<User> createUser(
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
-    throw Exception(
-        'Failed to create user. ${response.statusCode}. ${response.body}');
+
+    var json = jsonDecode(response.body);
+    var errMessage = json['errorMessage'];
+
+    throw Exception('Failed to create user.\n${errMessage}');
   }
 }
 
@@ -86,9 +89,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         title: Text('Register Failed'),
         content: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Text(
-              '''Please try again later.
-              ${snapshot.error}'''),
+          child: Text('${snapshot.error}'),
         ),
       );
 

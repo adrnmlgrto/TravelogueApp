@@ -7,6 +7,34 @@ import 'package:http/http.dart' as http;
 import 'package:myflutter/loginStates.dart';
 import 'package:myflutter/registration.dart';
 
+class User {
+  int? det_id;
+  String? det_fname;
+  String? det_lname;
+  String? det_email;
+
+  User(
+      {required this.det_id,
+      required this.det_fname,
+      required this.det_lname,
+      required this.det_email});
+
+  factory User.fromJson(Map<String, dynamic> parsedJson) {
+    return User(
+        det_id: parsedJson['id'],
+        det_fname: parsedJson['first_name'],
+        det_lname: parsedJson['last_name'],
+        det_email: parsedJson['email']);
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': det_id,
+        'first_name': det_fname,
+        'last_name': det_lname,
+        'email': det_email,
+      };
+}
+
 class LoginPage extends StatefulWidget {
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -16,7 +44,6 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
   bool _passwordVisible = true;
-  bool _isVisible = true;
 
   final emailController = TextEditingController();
   final passwController = TextEditingController();
@@ -40,13 +67,24 @@ class _LoginPageState extends State<LoginPage> {
     // String loginStatus = jsonDecode(response.body);
 
     if (response.statusCode == 201) {
-      print(response.statusCode); // CHECKING RESPONSE CODE, WILL DELETE LATER
+      print(jsonDecode(
+          response.body)); // CHECKING RESPONSE CODE, WILL DELETE LATER
+
+      List<User> myUser = (json.decode(response.body) as List)
+          .map((i) => User.fromJson(i))
+          .toList();
+
+      String? pushFname = myUser[0].det_fname;
+      String? pushLname = myUser[0].det_lname;
+      String? pushEmail = myUser[0].det_email;
+
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (context) => LoginSucess(email: emailController.text)));
+              builder: (context) => LoginSucess(
+                  fname: pushFname!, lname: pushLname!, email: pushEmail!)));
     } else {
-      print(response.statusCode);
+      print(response.body);
 
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => LoginFail()));

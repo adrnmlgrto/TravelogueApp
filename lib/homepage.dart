@@ -6,25 +6,52 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
+class CardItem {
+  final String urlImage;
+  final String title;
+
+  const CardItem({required this.urlImage, required this.title});
+}
+
 class _HomePageState extends State<HomePage> {
+  int activeIndex = 0;
+
+  List<CardItem> items = [
+    CardItem(
+      urlImage: 'https://i.imgur.com/3nDbdj9.jpg',
+      title: "Italy",
+    ),
+    CardItem(
+      urlImage: 'https://i.imgur.com/ovUxvfv.jpg',
+      title: "Greece",
+    ),
+    CardItem(
+      urlImage: 'https://i.imgur.com/xHYTpet.jpg',
+      title: "Japan",
+    ),
+  ];
+
   final assetImages = [
-    "https://i.imgur.com/7fJ8XLE.jpg",
-    "https://i.imgur.com/N7zUsni.jpg",
-    "https://i.imgur.com/COetQ1V.jpg",
-    "https://i.imgur.com/5Q5hWSH.jpg",
-    "https://i.imgur.com/rMYMEjp.jpg",
+    'https://i.imgur.com/lmVu6hE.jpg',
+    'https://i.imgur.com/AT99xvN.jpg',
+    'https://i.imgur.com/UDP5CU8.jpg',
+    'https://i.imgur.com/LF7TZtL.jpg',
+    'https://i.imgur.com/HAZkdmu.jpg',
+    'https://i.imgur.com/qs0gHJD.jpg',
+    'https://i.imgur.com/bIECyT1.jpg',
   ];
 
   List<String> imgURLs = [
-    'https://i.imgur.com/Ym4dXMX.jpg',
-    'https://i.imgur.com/3wmCBlT.jpg',
-    'https://i.imgur.com/kfycTnF.jpg'
+    'https://i.imgur.com/8QMxEOk.jpg',
+    'https://i.imgur.com/MtjZERb.jpg',
+    'https://i.imgur.com/BTfKstm.jpg'
   ];
 
   List<Widget> countrySheets = [
@@ -80,7 +107,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: Column(
+          body: Container(
+        child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Image.asset(
@@ -90,101 +118,139 @@ class _HomePageState extends State<HomePage> {
               ),
               buildIntro(),
               SizedBox(
-                height: 15,
+                height: 10,
               ),
               Expanded(
-                child: ListView(
-                  children: [
-                    //for carousel slider
-                    CarouselSlider.builder(
-                      options: CarouselOptions(
-                        height: 260,
-                        autoPlay: true,
-                        //pageSnapping: false,
-                        //enlargeStrategy: CenterPageEnlargeStrategy.height,
-                        autoPlayInterval: Duration(seconds: 6),
-                        viewportFraction: 1,
-                        //enlargeCenterPage: true,
-                      ),
-                      itemCount: assetImages.length,
-                      itemBuilder: (context, index, realIndex) {
-                        final assetImage = assetImages[index];
-                        return buildImage(assetImage, index);
-                      },
+                  child: ListView(children: [
+                //for carousel slider
+                Column(children: [
+                  CarouselSlider.builder(
+                    options: CarouselOptions(
+                      height: 260,
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 6),
+                      viewportFraction: 1,
+                      onPageChanged: (index, reason) =>
+                          setState(() => activeIndex = index),
                     ),
-                    SizedBox(height: 50),
-                    Padding(
-                        padding: EdgeInsets.only(right: 20),
-                        child: RichText(
-                          textAlign: TextAlign.end,
-                          text: TextSpan(
-                            text: "Explore our ",
-                            style: TextStyle(fontSize: 25, color: Colors.black),
-                            children: const <TextSpan>[
-                              TextSpan(
-                                text: "destinations",
-                                style: TextStyle(
-                                  color: Colors.deepOrange,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )
-                            ],
-                          ),
-                        )),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    for (int i = 0; i < imgURLs.length; i++)
-                      buildImageWidgets(
-                          context, this.imgURLs[i], this.countrySheets[i]),
-                    Padding(
-                        padding: EdgeInsets.only(right: 20),
-                        child: RichText(
-                          textAlign: TextAlign.end,
-                          text: TextSpan(
-                            text: "..and many more. ",
+                    itemCount: assetImages.length,
+                    itemBuilder: (context, index, realIndex) {
+                      final assetImage = assetImages[index];
+                      return buildImage(assetImage, index);
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  buildIndicator(),
+                ]),
+                SizedBox(height: 50),
+                Padding(
+                    padding: EdgeInsets.only(right: 20),
+                    child: RichText(
+                      textAlign: TextAlign.end,
+                      text: TextSpan(
+                        text: "Discover our ",
+                        style: TextStyle(fontSize: 25, color: Colors.black),
+                        children: const <TextSpan>[
+                          TextSpan(
+                            text: "destinations",
                             style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.deepOrange,
-                                fontWeight: FontWeight.bold),
-                            children: const <TextSpan>[
-                              TextSpan(
-                                text: "Book now!",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black,
-                                ),
-                              )
-                            ],
-                          ),
-                        )),
-                    SizedBox(
-                      height: 10,
-                    )
-                  ],
+                              color: Colors.deepOrange,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        ],
+                      ),
+                    )),
+                SizedBox(
+                  height: 15,
                 ),
-              )
+                for (int i = 0; i < imgURLs.length; i++)
+                  buildImageWidgets(
+                      context, this.imgURLs[i], this.countrySheets[i]),
+                Padding(
+                    padding: EdgeInsets.only(right: 20),
+                    child: RichText(
+                      textAlign: TextAlign.end,
+                      text: TextSpan(
+                        text: "..and many more. ",
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.deepOrange,
+                            fontWeight: FontWeight.bold),
+                        children: const <TextSpan>[
+                          TextSpan(
+                            text: "Book now!",
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black,
+                            ),
+                          )
+                        ],
+                      ),
+                    )),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: RichText(
+                      textAlign: TextAlign.start,
+                      text: TextSpan(
+                        text: "Popular",
+                        style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.deepOrange,
+                            fontWeight: FontWeight.bold),
+                        children: const <TextSpan>[
+                          TextSpan(
+                            text: " places",
+                            style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black,
+                            ),
+                          )
+                        ],
+                      ),
+                    )),
+                SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: <Widget>[
+                        for (int i = 0; i < items.length; i++)
+                          buildRow(context, items[i]),
+                      ],
+                    )),
+              ]))
             ]),
-      );
+      ));
+
+  Widget buildIndicator() => AnimatedSmoothIndicator(
+      activeIndex: activeIndex,
+      count: assetImages.length,
+      effect: ExpandingDotsEffect(
+          dotHeight: 8,
+          dotWidth: 8,
+          dotColor: Colors.grey,
+          activeDotColor: Colors.deepOrange));
 
   Widget buildIntro() {
     return Stack(children: [
       Column(children: const <Widget>[
-        Padding(padding: EdgeInsets.only(top: 50)),
+        Padding(padding: EdgeInsets.only(top: 35)),
         Text.rich(
           TextSpan(
               text: " Welcome,",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 50.0,
+                fontSize: 45.0,
                 color: Colors.black,
               ),
               children: [
                 TextSpan(
-                  text: "\n  Let's get started!",
+                  text: "\n  travel with us today!",
                   style: TextStyle(
                     fontWeight: FontWeight.normal,
-                    fontSize: 40.0,
+                    fontSize: 30.0,
                   ),
                 ),
               ]),
@@ -195,7 +261,6 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildImage(String assetImage, int index) {
     return Container(
-      //margin: EdgeInsets.symmetric(horizontal: 8),
       color: Colors.transparent,
       child: ClipRRect(
         //borderRadius: BorderRadius.circular(20),
@@ -210,42 +275,61 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildImageWidgets(
       BuildContext context, String imgURLs, Widget countrySheets) {
-    return Container(
-        margin: EdgeInsets.only(left: 10, right: 10, bottom: 18),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Colors.transparent,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 2,
-                offset: Offset(4, 4),
-              )
-            ]),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            InkWell(
-              onTap: () {
-                showModalBottomSheet(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(20),
-                  )),
-                  context: context,
-                  builder: (builder) => countrySheets,
-                );
-              },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: CachedNetworkImage(
-                  imageUrl: imgURLs,
-                  placeholder: (context, url) => CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                ),
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Container(
+          margin: EdgeInsets.only(left: 10, right: 10, bottom: 18),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),
+              //color: Colors.transparent,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  blurRadius: 2,
+                  offset: Offset(4, 4),
+                )
+              ]),
+          child: InkWell(
+            onTap: () {
+              showModalBottomSheet(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(20),
+                )),
+                context: context,
+                builder: (builder) => countrySheets,
+              );
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: CachedNetworkImage(
+                imageUrl: imgURLs,
+                placeholder: (context, url) => CircularProgressIndicator(),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
             ),
-          ],
-        ));
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget buildRow(BuildContext context, CardItem cardItem) {
+    return Container(
+      padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
+      width: 200,
+      height: 180,
+      child: Column(
+        children: [
+          CachedNetworkImage(
+            imageUrl: cardItem.urlImage,
+            placeholder: (context, url) => CircularProgressIndicator(),
+            errorWidget: (context, url, error) => Icon(Icons.error),
+          ),
+          Text(cardItem.title, style: TextStyle(fontSize: 20)),
+          SizedBox(height: 4),
+        ],
+      ),
+    );
   }
 }
