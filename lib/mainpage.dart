@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:myflutter/homepage.dart';
-import 'package:myflutter/bookAirport.dart';
 import 'package:myflutter/bookTravel.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:myflutter/login.dart';
@@ -20,14 +19,6 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
-  final pageScreens = [
-    HomePage(),
-    BookingAir(),
-    BookingHotel(),
-    Center(
-      child: Text('PROFILE'),
-    ),
-  ];
 
   Widget showScreen(int index) {
     if (index == 0) {
