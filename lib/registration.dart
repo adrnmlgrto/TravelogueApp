@@ -9,7 +9,7 @@ Future<User> createUser(
     String first_name, String last_name, String email, String password) async {
   final response = await http.post(
     // 10.0.2.2, 192.168.100.44
-    Uri.parse('http://192.168.100.44/travelogue/create.php'),
+    Uri.parse('http://10.0.2.2/travelogue/create.php'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Accept': 'application/json',
