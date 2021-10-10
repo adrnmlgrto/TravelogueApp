@@ -53,7 +53,8 @@ class _LoginPageState extends State<LoginPage> {
     String password = passwController.text;
 
     final response = await http.post(
-      Uri.parse('http://10.0.2.2/travelogue/login.php'),
+      // 10.0.2.2, 192.168.100.44
+      Uri.parse('http://192.168.100.44/travelogue/login.php'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Accept': 'application/json',

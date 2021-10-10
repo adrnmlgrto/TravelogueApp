@@ -112,34 +112,36 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // body: pageScreens[currentIndex],
-      body: showScreen(currentIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        iconSize: 30,
-        currentIndex: currentIndex,
-        onTap: (index) => setState(() {
-          currentIndex = index;
-        }),
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.airplanemode_active_outlined),
-            label: "Book Travel",
-          ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.apartment_rounded),
-          //   label: "Book Hotel",
-          // ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: "Profile",
-          ),
-        ],
+    return SafeArea(
+      child: Scaffold(
+        // body: pageScreens[currentIndex],
+        body: showScreen(currentIndex),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          iconSize: 30,
+          currentIndex: currentIndex,
+          onTap: (index) => setState(() {
+            currentIndex = index;
+          }),
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_rounded),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.airplanemode_active_outlined),
+              label: "Book Travel",
+            ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(Icons.apartment_rounded),
+            //   label: "Book Hotel",
+            // ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle),
+              label: "Profile",
+            ),
+          ],
+        ),
       ),
     );
   }

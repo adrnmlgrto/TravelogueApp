@@ -41,23 +41,25 @@ class _LoginSucessState extends State<LoginSucess> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // const SizedBox(height: 150.0),
-                  const CircularProgressIndicator(),
-                ],
-              ),
-              const SizedBox(height: 20),
-              const Text('Logging in'),
-            ],
+  Widget build(BuildContext context) => SafeArea(
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // const SizedBox(height: 150.0),
+                    const CircularProgressIndicator(),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                const Text('Logging in'),
+              ],
+            ),
           ),
         ),
       );
@@ -108,23 +110,25 @@ class _LoginFailState extends State<LoginFail> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // const SizedBox(height: 150.0),
-                  const CircularProgressIndicator(),
-                ],
-              ),
-              const SizedBox(height: 20),
-              const Text('Logging in'),
-            ],
+  Widget build(BuildContext context) => SafeArea(
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // const SizedBox(height: 150.0),
+                    const CircularProgressIndicator(),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                const Text('Logging in'),
+              ],
+            ),
           ),
         ),
       );
