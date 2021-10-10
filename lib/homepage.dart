@@ -316,7 +316,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildRow(BuildContext context, CardItem cardItem) {
     return Container(
-      padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
+      padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
       width: 200,
       height: 180,
       child: Column(

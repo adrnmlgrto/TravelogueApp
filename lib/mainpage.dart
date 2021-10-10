@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myflutter/homepage.dart';
 import 'package:myflutter/bookAirport.dart';
-import 'package:myflutter/bookHotel.dart';
+import 'package:myflutter/bookTravel.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:myflutter/login.dart';
 
@@ -33,8 +33,6 @@ class _MainPageState extends State<MainPage> {
     if (index == 0) {
       return HomePage();
     } else if (index == 1) {
-      return BookingAir();
-    } else if (index == 2) {
       return BookingHotel();
     }
     return Padding(
@@ -140,12 +138,12 @@ class _MainPageState extends State<MainPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.airplanemode_active_outlined),
-            label: "Book Flight",
+            label: "Book Travel",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.apartment_rounded),
-            label: "Book Hotel",
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.apartment_rounded),
+          //   label: "Book Hotel",
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
             label: "Profile",
