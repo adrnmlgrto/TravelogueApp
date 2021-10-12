@@ -4,12 +4,17 @@ import 'dart:async';
 import 'package:myflutter/mainpage.dart';
 
 class LoginSucess extends StatefulWidget {
+  final int id;
   final String fname;
   final String lname;
   final String email;
 
   const LoginSucess(
-      {Key? key, required this.fname, required this.lname, required this.email})
+      {Key? key,
+      required this.id,
+      required this.fname,
+      required this.lname,
+      required this.email})
       : super(key: key);
 
   @override
@@ -33,6 +38,7 @@ class _LoginSucessState extends State<LoginSucess> {
       context,
       MaterialPageRoute(
           builder: (context) => MainPage(
+                id: widget.id,
                 fname: widget.fname,
                 lname: widget.lname,
                 email: widget.email,

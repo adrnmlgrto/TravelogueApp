@@ -75,6 +75,7 @@ class _LoginPageState extends State<LoginPage> {
           .map((i) => User.fromJson(i))
           .toList();
 
+      int? pushID = myUser[0].det_id;
       String? pushFname = myUser[0].det_fname;
       String? pushLname = myUser[0].det_lname;
       String? pushEmail = myUser[0].det_email;
@@ -83,7 +84,10 @@ class _LoginPageState extends State<LoginPage> {
           context,
           MaterialPageRoute(
               builder: (context) => LoginSucess(
-                  fname: pushFname!, lname: pushLname!, email: pushEmail!)));
+                  id: pushID!,
+                  fname: pushFname!,
+                  lname: pushLname!,
+                  email: pushEmail!)));
     } else {
       print(response.body);
 

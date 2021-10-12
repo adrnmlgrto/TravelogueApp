@@ -5,12 +5,17 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:myflutter/login.dart';
 
 class MainPage extends StatefulWidget {
+  final int id;
   final String fname;
   final String lname;
   final String email;
 
   const MainPage(
-      {Key? key, required this.fname, required this.lname, required this.email})
+      {Key? key,
+      required this.id,
+      required this.fname,
+      required this.lname,
+      required this.email})
       : super(key: key);
 
   @override
