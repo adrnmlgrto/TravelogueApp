@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:myflutter/homepage.dart';
 import 'package:myflutter/bookTravel.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:myflutter/login.dart';
+import 'package:http/http.dart' as http;
 
 class MainPage extends StatefulWidget {
   final int id;
@@ -24,6 +27,101 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
+
+  Future deleteUser() async {
+    int userId = widget.id;
+
+    final response = await http.post(
+      // 10.0.2.2, 192.168.100.44
+      Uri.parse('http://10.0.2.2/travelogue/delete.php'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
+      },
+      body: jsonEncode(<String, int>{
+        'id': userId,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      print(response.statusCode);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Account Deleted Successfully'),
+            content: Text(
+              'Returning to login screen.',
+              textAlign: TextAlign.left,
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                  );
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      print(response.statusCode);
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Account Delete Failed'),
+              content: Text(
+                'Please try again later.',
+                textAlign: TextAlign.left,
+              ),
+              actions: <Widget>[
+                TextButton(
+                  child: Text("OK"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          });
+    }
+  }
+
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("WARNING"),
+          content: Text(
+            'Are you sure you want to delete your account?',
+            textAlign: TextAlign.left,
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text("No"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text("Yes"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                deleteUser();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   Widget showScreen(int index) {
     if (index == 0) {
@@ -96,7 +194,14 @@ class _MainPageState extends State<MainPage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 130),
+          SizedBox(height: 100),
+          Row(
+            children: [
+              Expanded(
+                  child: OutlinedButton(
+                      onPressed: _showDialog, child: Text('DELETE ACCOUNT'))),
+            ],
+          ),
           Row(
             children: [
               Expanded(

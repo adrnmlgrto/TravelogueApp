@@ -82,7 +82,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.of(context).pop();
             },
             child: Text('OK'),
           )
@@ -98,7 +98,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.of(context).pop();
             },
             child: Text('OK'),
           )
