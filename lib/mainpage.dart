@@ -127,7 +127,7 @@ class _MainPageState extends State<MainPage> {
     if (index == 0) {
       return HomePage();
     } else if (index == 1) {
-      return BookingHotel();
+      return Booking();
     }
     return Padding(
       padding: EdgeInsets.fromLTRB(30, 50, 30, 0),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:myflutter/ticket.dart';
 
-class BookingHotel extends StatefulWidget {
+class Booking extends StatefulWidget {
   @override
-  _BookingHotel createState() => _BookingHotel();
+  _Booking createState() => _Booking();
 }
 
-class _BookingHotel extends State<BookingHotel> {
+class _Booking extends State<Booking> {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController _who = new TextEditingController();
@@ -100,7 +100,7 @@ class _BookingHotel extends State<BookingHotel> {
                           style: TextStyle(fontSize: 30, color: Colors.black),
                           children: const <TextSpan>[
                             TextSpan(
-                              text: "hotel",
+                              text: "travel",
                               style: TextStyle(
                                 color: Colors.deepOrange,
                                 fontWeight: FontWeight.bold,
