@@ -1,13 +1,6 @@
 # Travelogue Mobile Application
 A new Flutter project for the final project for App Development Course. <br> From the course of **ITE 013** of section **CS31S1**.
 
-## Collaborators
- - **BORMATE**, KRISTIAN
- - **JAEL**, ZEHLL
- - **MANALASTAS**, ARYANNA
- - **MELEGRITO**, JOHN ADRIAN
- - **POWELL**, DIRIAN
-
 ## Instructions
  1. Go into the project folder and enter the line "***flutter pub get***".
  2. To enable splash screen, enter the command "***flutter pub run flutter_native_splash:create***".
@@ -43,4 +36,11 @@ A new Flutter project for the final project for App Development Course. <br> Fro
  - mainpage.dart (line 36)
 
 #### Note: If endpoints do not work with 10.0.2.2, use own Ipv4 Address in ipconfig.
+
+## Collaborators
+ - **BORMATE**, KRISTIAN
+ - **JAEL**, ZEHLL
+ - **MANALASTAS**, ARYANNA
+ - **MELEGRITO**, JOHN ADRIAN
+ - **POWELL**, DIRIAN
 
